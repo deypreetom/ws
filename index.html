@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Word Smart — MCQ Practice Hub</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0d12;
+    --bg-2: #11141b;
+    --card: #161a23;
+    --card-hover: #1c2130;
+    --border: #232938;
+    --text: #e8ecf3;
+    --muted: #8a93a6;
+    --accent-1: #7c5cff;   /* WordSmart 1 */
+    --accent-2: #00c2a8;   /* WordSmart 2 */
+    --gold: #f5c26b;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(1200px 600px at 10% -10%, #1a1f33 0%, transparent 60%),
+                radial-gradient(1000px 500px at 110% 10%, #10202a 0%, transparent 60%),
+                var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 30px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 900px;
+  }
+
+  header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, var(--accent-1), var(--gold), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+  }
+
+  header p.bangla {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  header p.sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .stats-bar span b {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--accent) inset;
+  }
+
+  .card:hover::before { transform: scaleX(1); }
+
+  .card.ws1 { --accent: var(--accent-1); }
+  .card.ws2 { --accent: var(--accent-2); }
+
+  .card .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .card h2 {
+    font-size: 1.6rem;
+    margin-top: 4px;
+  }
+
+  .card p.desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .card .meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .card .meta span {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 999px;
+  }
+
+  .card .cta {
+    margin-top: auto;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .card .cta .arrow {
+    transition: transform 0.25s ease;
+  }
+
+  .card:hover .cta .arrow { transform: translateX(6px); }
+
+  footer {
+    margin-top: auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    max-width: 900px;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    .card { padding: 22px 18px; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>Word Smart — MCQ Practice</h1>
+    <p class="bangla">বাংলা · Word Smart Games</p>
+    <p class="sub">Choose a practice deck below. Your progress is saved locally in this browser.</p>
+
+    <div class="stats-bar">
+      <span><b>2</b> Decks</span>
+      <span><b>1,670</b> Total Words</span>
+      <span><b>67</b> Practice Sets</span>
+      <span>Progress saved in this browser</span>
+    </div>
+  </header>
+
+  <main class="choice-grid">
+
+    <a class="card ws1" href="WS1.html">
+      <span class="tag">Deck 01</span>
+      <h2>WordSmart_1</h2>
+      <p class="desc">The first volume — build a strong foundation with 825 essential vocabulary words across 33 focused sets.</p>
+      <div class="meta">
+        <span>825 words</span>
+        <span>33 sets</span>
+        <span>25 per set</span>
+      </div>
+      <div class="cta">
+        <span>Start Practicing</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="card ws2" href="WS2.html">
+      <span class="tag">Deck 02</span>
+      <h2>WordSmart_2</h2>
+      <p class="desc">The second volume — advance your vocabulary with 845 challenging words across 34 carefully curated sets.</p>
+      <div class="meta">
+        <span>845 words</span>
+        <span>34 sets</span>
+        <span>25 per set</span>
+      </div>
+      <div class="cta">
+        <span>Start Practicing</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+  </main>
+
+</body>
+</html>
